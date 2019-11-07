@@ -6,7 +6,7 @@ export default function APODPanel() {
     const [apod, setApod] = useState([]);
     const [date, setDate] = useState(Date())
 
-    const previousDate = (date)=>{
+    const previousDate = ()=>{
     //    const myDate = new Date()
     //    myDate.setDate(myDate.getDate()-1)
         console.log(date);
