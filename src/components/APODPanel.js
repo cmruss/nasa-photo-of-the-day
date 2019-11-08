@@ -4,14 +4,17 @@ import axios from "axios";
 
 export default function APODPanel() {
     const [apod, setApod] = useState([]);
-    const [date, setDate] = useState(Date())
 
-    const previousDate = ()=>{
-    //    const myDate = new Date()
-    //    myDate.setDate(myDate.getDate()-1)
-        console.log(date);
+    function dateAdd(dte){
+        var date = new Date(dte); 
+        date.setDate(date.getDate() + 1);
+        console.log("add one day= "+date)
     }
-    console.log(date);
+    function dateSub(dte){
+        var date = new Date(dte);
+        date.setDate(date.getDate() - 1);
+        console.log("minus one day = "+ date)
+    }
 
     useEffect(() => {
         axios
@@ -34,11 +37,10 @@ export default function APODPanel() {
                     date={apod.date}
                     img={apod.hdurl}
                     description={apod.explanation}
+                    copyright={apod.copyright}
+                    dateAdd={dateAdd} 
+                    dateSub={dateSub}
                     />
-            </div>
-            <div className="button_panel">
-                <button className="previous_button">Go back a day</button>
-                <button className="next_button">Next day</button>
             </div>
         </div>
     );
