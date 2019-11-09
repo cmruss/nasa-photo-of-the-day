@@ -13,6 +13,9 @@ const Img = styled.img`
     border-radius: 50%;
     margin: 5% 0;
     width: 75%;
+    &:after{
+        padding-bottom: 100%;
+    }
 `;
 const TextContainer = styled.div`
     width: 75%;
@@ -27,11 +30,12 @@ const ButtonContainer = styled.div`
 
 
 const APODCard = props => {
+ 
     return (
-    <ImgCard style={{backgroundImage: `url(${props.img})`}}>
+    <ImgCard style={{backgroundImage: `url(${props.img})`,backgroundRepeat: `no-repeat`, backgroundSize: `100% 100%` }}>
             <Jumbotron fluid>
         <Container props fluid>
-        <h1 className="display-3">{props.date}</h1>
+        <h1 className="display-3">{props.imgDate}</h1>
         <Img className="apod_img" alt="Picture of the Day" src={props.img} />
         <TextContainer>
           <h2 className="display-4">{props.title}</h2>
@@ -39,8 +43,8 @@ const APODCard = props => {
           <Copyright className="lead">©{props.copyright}</Copyright>
         </TextContainer>
         <ButtonContainer>
-            <Button onClick={()=>{props.dateSub();}} outline color="secondary">previous</Button>{' '}
-            <Button onClick={()=>{props.dateAdd();}} outline color="secondary">forward</Button>{' '}
+            <Button onClick={()=>{props.dateSub(props.date)}} outline color="secondary">previous</Button>{' '}
+            <Button /*style={{display: `none`}}*/ onClick={()=>{props.dateAdd(props.date)}} outline color="secondary">forward</Button>{' '}
         </ButtonContainer>
         </Container>
       </Jumbotron>
