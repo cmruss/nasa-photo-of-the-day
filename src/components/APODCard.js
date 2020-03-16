@@ -35,9 +35,9 @@ const TextContainer = styled.div`
     }
 `;
 const Copyright = styled.p`
-    font-weight: bold;
 `
 const ButtonContainer = styled.div`
+    margin: 1% auto;
     display: flex;
     justify-content: space-evenly;
 `;
