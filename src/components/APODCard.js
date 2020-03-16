@@ -7,6 +7,9 @@ import moment from "moment";
 const ImgCard = styled.div`
     background: dimgrey;
     padding: 2% 5% 0 5%;
+    h1 {
+        font-weight: bold;
+    }
 `;
 const AspectRatio = styled.div`
     width: 75%;
@@ -27,6 +30,9 @@ const Img = styled.img`
 const TextContainer = styled.div`
     width: 75%;
     margin-bottom: 5%;
+    h2 {
+        font-weight: bold;
+    }
 `;
 const Copyright = styled.p`
     font-weight: bold;
@@ -50,12 +56,12 @@ const APODCard = props => {
     <ImgCard style={{backgroundImage: `url(${props.img})`, backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%'}}>
       <Jumbotron fluid>
         <Container props fluid>
-        <h1 className="display-5">{props.imgDate}</h1>
+        <h1 className="lead">{props.imgDate}</h1>
         <AspectRatio>
             <Img className="apod_img" alt="Picture of the Day" src={props.img}/>
         </AspectRatio>
         <TextContainer>
-          <h2 className="display-5">{props.title}</h2>
+          <h2 className="lead">{props.title}</h2>
           <p className="lead">{props.description}</p>
           {copyright && <Copyright className="lead">©{props.copyright}</Copyright>}
         </TextContainer>
