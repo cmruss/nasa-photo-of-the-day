@@ -19,8 +19,7 @@ const AspectRatio = styled.div`
     padding-bottom: 75%;
     overflow: hidden;
     border-radius: 50%;
-    object-fit: fill;
-    margin: 2% auto;
+    min-height: 100%;
 `
 const Img = styled.img`
     overflow:hidden;
@@ -30,7 +29,7 @@ const Img = styled.img`
 `;
 const TextContainer = styled.div`
     width: 75%;
-    margin-bottom: 5%;
+    margin: 5% auto;
     h2 {
         font-weight: bold;
     }
