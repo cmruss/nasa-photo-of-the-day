@@ -7,18 +7,17 @@ export default function APODPanel() {
     const [apod, setApod] = useState([]);
     const [date,setDate] = useState(Date());
     //make two funtions that increment date +/-, store that increment to state, make a function that converts date to the nasa api format &date=yyyy/mm/dd, recall the current date from state in the get request
-    const dateAdd = (dte) => {
-        var date = new Date(dte); 
-        date.setDate(date.getDate() + 1);
-        setDate(date);
-        // console.log("addaday"+ date)
+    const dateAdd = (date) => {
+        var newDate = new Date(date); 
+        newDate.setDate(newDate.getDate() + 1);
+        setDate(newDate);
+        // console.log("addaday"+ newDate)
     }
-    const dateSub = (dte) => {
-        var date = new Date(dte);
-        date.setDate(date.getDate() - 1);
-        setDate(date);
-        moment(date).format("YYYY/MM/DD");
-        // console.log("takaday"+ date)
+    const dateSub = (date) => {
+        var newDate = new Date(date);
+        newDate.setDate(newDate.getDate() - 1);
+        setDate(newDate);
+        // console.log("takaday"+ newDate)
     }
 
     useEffect(() => {
@@ -26,7 +25,6 @@ export default function APODPanel() {
         .get(`https://api.nasa.gov/planetary/apod?api_key=BcVA8joxv0595Knb0NaCQ4bsU43BTYVKZl3egP6O&date=${moment(date).format("YYYY-MM-DD")}`)
         .then(response => {
             setApod(response.data)
-            // console.log(response);
         })
         .catch(err => {
             console.log(`no dice`, err);
