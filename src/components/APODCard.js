@@ -9,7 +9,7 @@ const ImgCard = styled.div`
     padding: 2% 5% 0 5%;
     min-height: 100%;
     h1 {
-        font-weight: bold;
+        font-size: 3.4rem;
     }
 `;
 const AspectRatio = styled.div`
@@ -56,7 +56,7 @@ const APODCard = props => {
     <ImgCard style={{backgroundImage: `url(${props.img})`, backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%'}}>
       <Jumbotron fluid>
         <Container props fluid>
-        <h1 className="lead">{props.imgDate}</h1>
+        <h1 className="display-4">{props.imgDate}</h1>
         <AspectRatio>
             <Img className="apod_img" alt="Picture of the Day" src={props.img}/>
         </AspectRatio>
