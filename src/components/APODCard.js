@@ -7,6 +7,7 @@ import moment from "moment";
 const ImgCard = styled.div`
     background: dimgrey;
     padding: 2% 5% 0 5%;
+    min-height: 100%;
     h1 {
         font-weight: bold;
     }
