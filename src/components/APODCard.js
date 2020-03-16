@@ -53,12 +53,12 @@ const APODCard = props => {
       }, [props.date])
 
     return (
-    <ImgCard style={{backgroundImage: `url(${props.img})`, backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%'}}>
+    <ImgCard style={{backgroundImage: `url(${props.img})`, backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', display: props.loading ? "none" : "block" }}>
       <Jumbotron fluid>
         <Container props fluid>
         <h1 className="display-4">{props.imgDate}</h1>
         <AspectRatio>
-            <Img className="apod_img" alt="Picture of the Day" src={props.img}/>
+            <Img onLoad={props.setLoading(false)} className="apod_img" alt="Picture of the Day" src={props.img} style={{display: props.loading ? "none" : "block" }}/>
         </AspectRatio>
         <TextContainer>
           <h2 className="lead">{props.title}</h2>
