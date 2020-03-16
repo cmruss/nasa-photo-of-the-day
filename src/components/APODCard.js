@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from 'reactstrap';
 import { Jumbotron, Container } from 'reactstrap';
 import styled from "styled-components";
@@ -17,7 +17,6 @@ const AspectRatio = styled.div`
     border-radius: 50%;
     object-fit: fill;
     margin: 2% auto;
-
 `
 const Img = styled.img`
     overflow:hidden;
@@ -32,12 +31,10 @@ const TextContainer = styled.div`
 const Copyright = styled.p`
     font-weight: bold;
 `
-
 const ButtonContainer = styled.div`
     display: flex;
     justify-content: space-evenly;
 `;
-
 
 const APODCard = props => {
 
@@ -45,11 +42,15 @@ const APODCard = props => {
     let imgDate = props.imgDate
     let copyright = props.copyright
 
+    useEffect(() => {
+        window.scrollTo(50, 0)
+      }, [props.date])
+
     return (
     <ImgCard style={{backgroundImage: `url(${props.img})`, backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%'}}>
       <Jumbotron fluid>
         <Container props fluid>
-        <h1 className="lead">{props.imgDate}</h1>
+        <h1 className="display-5">{props.imgDate}</h1>
         <AspectRatio>
             <Img className="apod_img" alt="Picture of the Day" src={props.img}/>
         </AspectRatio>
