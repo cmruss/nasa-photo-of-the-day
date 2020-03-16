@@ -37,6 +37,10 @@ const TextContainer = styled.div`
 `;
 const Copyright = styled.p`
 `
+const Credit = styled.p`
+    color: dimgrey;
+    font-size: 0.8rem;
+`
 const ButtonContainer = styled.div`
     margin: 1% auto;
     display: flex;
@@ -67,10 +71,11 @@ const APODCard = props => {
           {copyright && <Copyright className="lead">©{props.copyright}</Copyright>}
         </TextContainer>
         <ButtonContainer>
-            <Button onClick={()=>{props.dateSub(props.date)}} outline color="secondary">previous</Button>{' '}
-           { imgDate < today && <Button onClick={()=>{props.dateAdd(props.date)}} id="Forward" outline color="secondary">forward</Button>}
+            <Button onClick={()=>{props.dateSub(props.date)}} outline color="secondary">previous</Button>
+            <Button onClick={()=>{props.dateAdd(props.date)}} id="Forward" outline color="secondary" disabled={imgDate < today ? false : true }>forward</Button>
         </ButtonContainer>
         </Container>
+        <Credit>design 2020 cmruss | made with the NASA APOD API & Material UI</Credit>
       </Jumbotron>
     </ImgCard>
     )
