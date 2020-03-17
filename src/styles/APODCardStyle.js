@@ -30,9 +30,9 @@ export const Overlay = styled.div`
 export const Modal = styled.div`
     position: absolute; 
     right: 0;
-    top: 0;
+    top: 0%;
+    margin: 5%;
     cursor: zoom-out; 
-    width: 100vw;
     background: whitesmoke;
     border: none;
 `
