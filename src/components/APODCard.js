@@ -3,7 +3,7 @@ import { Button } from "reactstrap";
 import { Jumbotron, Container } from 'reactstrap';
 import moment from "moment";
 import img from "../img/404.jpg";
-import { ImgCard, Img, AspectRatio,TextContainer, Copyright, Credit, ButtonContainer }from "../styles/APODCardStyle";
+import { ImgCard, Img, AspectRatio,TextContainer, Copyright, Credit, ButtonContainer, Overlay, Modal }from "../styles/APODCardStyle";
 
 
 const APODCard = props => {
@@ -34,24 +34,19 @@ const APODCard = props => {
                 <Container props fluid>
                     <h1 className="display-4">{props.imgDate}</h1>
                     {clicked && (
-                    <dialog
-                        className="dialog"
-                        style={{ 
-                            position: "absolute", 
-                            zIndex: 1, 
-                            cursor: "zoom-out", 
-                            width: "100vw" 
-                        }}
-                        open
-                        onClick={toggleImage}
-                    >
-                        <img
-                        className="apod_img" 
-                        alt="Astronomy Picture of the Day" 
-                        src={props.img ? props.img : img} 
-                        onClick={toggleImage}
-                        />
-                    </dialog>)}
+                    <Overlay>
+                        <Modal
+                            className="dialog"
+                            onClick={toggleImage}
+                        >
+                            <img
+                            className="apod_img" 
+                            alt="Astronomy Picture of the Day" 
+                            src={props.img ? props.img : img} 
+                            onClick={toggleImage}
+                            />
+                        </Modal>
+                    </Overlay>)}
                     <AspectRatio>
                         <Img 
                             onLoad={props.setLoading(false)} 

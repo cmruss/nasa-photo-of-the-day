@@ -17,9 +17,27 @@ export const AspectRatio = styled.div`
     border-radius: 50%;
     min-height: 100%;
 `;
+export const Overlay = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1; 
+    background-color: rgba(128,128,128,0.5);
+`
+export const Modal = styled.div`
+    position: absolute; 
+    right: 0;
+    top: 0;
+    cursor: zoom-out; 
+    width: 100vw;
+    background: whitesmoke;
+    border: none;
+`
 export const Img = styled.img`
-    overflow:hidden;
-    position:absolute;
+    overflow: hidden;
+    position: absolute;
     right: 0;
     min-height: 100%;
 `;
