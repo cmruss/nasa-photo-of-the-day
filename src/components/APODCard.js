@@ -34,24 +34,24 @@ const APODCard = props => {
                 <Container props fluid>
                     <h1 className="display-4">{props.imgDate}</h1>
                     {clicked && (
-                        <dialog
-                            className="dialog"
-                            style={{ 
-                                position: "absolute", 
-                                zIndex: 1, 
-                                cursor: "zoom-out", 
-                                width: "100vw" 
-                            }}
-                            open
-                            onClick={toggleImage}
-                        >
-                            <img
-                            className="apod_img" 
-                            alt="Astronomy Picture of the Day" 
-                            src={props.img ? props.img : img} 
-                            onClick={toggleImage}
-                            />
-                        </dialog>)}
+                    <dialog
+                        className="dialog"
+                        style={{ 
+                            position: "absolute", 
+                            zIndex: 1, 
+                            cursor: "zoom-out", 
+                            width: "100vw" 
+                        }}
+                        open
+                        onClick={toggleImage}
+                    >
+                        <img
+                        className="apod_img" 
+                        alt="Astronomy Picture of the Day" 
+                        src={props.img ? props.img : img} 
+                        onClick={toggleImage}
+                        />
+                    </dialog>)}
                     <AspectRatio>
                         <Img 
                             onLoad={props.setLoading(false)} 
