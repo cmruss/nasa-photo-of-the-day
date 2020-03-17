@@ -23,6 +23,7 @@ export const Overlay = styled.div`
     left: 0;
     width: 100vw;
     height: 100vh;
+    overflow-y: scroll;
     z-index: 1; 
     background-color: rgba(128,128,128,0.5);
 `
