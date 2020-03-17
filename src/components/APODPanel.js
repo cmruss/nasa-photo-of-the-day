@@ -17,7 +17,7 @@ let initialState = {
 
 export default function APODPanel() {
     const [apod, setApod] = useState(initialState);
-    const [date,setDate] = useLocalStorage("imgDate", Date());
+    const [date, setDate] = useLocalStorage("imgDate", Date());
     const [loading, setLoading] = useState(true);
 
     const dateAdd = (date) => {
@@ -35,7 +35,6 @@ export default function APODPanel() {
         axios
         .get(`https://api.nasa.gov/planetary/apod?api_key=BcVA8joxv0595Knb0NaCQ4bsU43BTYVKZl3egP6O&date=${moment(date).format("YYYY-MM-DD")}`)
         .then(response => {
-            console.log(response.data)
             setApod(response.data)
         })
         .catch(err => {

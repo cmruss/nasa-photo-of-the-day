@@ -1,62 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "reactstrap";
 import { Jumbotron, Container } from 'reactstrap';
-import styled from "styled-components";
 import moment from "moment";
 import img from "../img/404.jpg";
+import { ImgCard, Img, AspectRatio,TextContainer, Copyright, Credit, ButtonContainer }from "../styles/APODCardStyle";
 
-const ImgCard = styled.div`
-    background: dimgrey;
-    padding: 2% 5% 0 5%;
-    min-height: 100%;
-    h1 {
-        font-size: 3.4rem;
-    }
-`;
-const AspectRatio = styled.div`
-    width: 75%;
-    position: relative;
-    height: 0;
-    padding-bottom: 75%;
-    overflow: hidden;
-    border-radius: 50%;
-    min-height: 100%;
-`;
-const Img = styled.img`
-    overflow:hidden;
-    position:absolute;
-    right: 0;
-    min-height: 100%;
-`;
-const TextContainer = styled.div`
-    width: 75%;
-    margin: 5% auto;
-    h2 {
-        font-weight: bold;
-    }
-`;
-const Copyright = styled.p`
-`
-const Credit = styled.p`
-    color: dimgrey;
-    font-size: 0.8rem;
-    margin-top: 5%;
-`;
-const ButtonContainer = styled.div`
-    margin: 1% auto;
-    display: flex;
-    justify-content: space-evenly;
-`;
 
 const APODCard = props => {
+    const [clicked, setClicked] = useState(false)
 
-    let today = moment(new Date()).format("YYYY-MM-DD")
-    let imgDate = props.imgDate
-    let copyright = props.copyright
+    let today = moment(new Date()).format("YYYY-MM-DD");
+    let imgDate = props.imgDate;
+    let copyright = props.copyright;
 
     useEffect(() => {
         window.scrollTo(50, 0)
-      }, [props.date])
+    }, [props.date]);
+
+    const toggleImage = () => {
+        setClicked(!clicked)
+    };
 
     return (
         <ImgCard 
@@ -70,13 +33,36 @@ const APODCard = props => {
             <Jumbotron fluid>
                 <Container props fluid>
                     <h1 className="display-4">{props.imgDate}</h1>
+                    {clicked && (
+                        <dialog
+                            className="dialog"
+                            style={{ 
+                                position: "absolute", 
+                                zIndex: 1, 
+                                cursor: "zoom-out", 
+                                width: "100vw" 
+                            }}
+                            open
+                            onClick={toggleImage}
+                        >
+                            <img
+                            className="apod_img" 
+                            alt="Astronomy Picture of the Day" 
+                            src={props.img ? props.img : img} 
+                            onClick={toggleImage}
+                            />
+                        </dialog>)}
                     <AspectRatio>
                         <Img 
                             onLoad={props.setLoading(false)} 
                             className="apod_img" 
                             alt="Picture of the Day" 
                             src={props.img ? props.img : img} 
-                            style={{display: props.loading ? "none" : "block" }}
+                            style={{
+                                display: props.loading ? "none" : "block", 
+                                cursor: "zoom-in" 
+                            }}
+                            onClick={toggleImage}
                         />
                     </AspectRatio>
                     <TextContainer>
