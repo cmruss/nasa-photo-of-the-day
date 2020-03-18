@@ -1,29 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button } from "reactstrap";
 import { Jumbotron, Container } from 'reactstrap';
-import moment from "moment";
+/* Image to display if the current image cant be returned */
 import img from "../img/404.jpg";
 import { ImgCard, Img, AspectRatio,TextContainer, Copyright, Credit, ButtonContainer, Overlay, Modal }from "../styles/APODCardStyle";
 
-
 const APODCard = props => {
-    const [clicked, setClicked] = useState(false)
-
-    let today = moment(new Date()).format("YYYY-MM-DD");
-    let imgDate = props.imgDate;
-    let copyright = props.copyright;
-
-    useEffect(() => {
-        window.scrollTo(50, 0)
-    }, [props.date]);
-
+    /* State hook to determine if the modal shows or not, default not */
+    const [modal, setModal] = useState(false)
+    /* Toggles the "modal" state */
     const toggleImage = () => {
-        setClicked(!clicked)
+        setModal(!modal)
     };
 
     return (
         <ImgCard 
             style={{
+                /* If no image loads use stock asset*/
                 backgroundImage: props.img ? `url(${props.img})` : `url(${img})`, 
                 backgroundRepeat: "no-repeat", 
                 backgroundSize: "100% 100%", 
@@ -33,7 +26,7 @@ const APODCard = props => {
             <Jumbotron fluid>
                 <Container props fluid>
                     <h1 className="display-4">{props.imgDate}</h1>
-                    {clicked && (
+                    {modal && (
                     <Overlay>
                         <Modal
                             className="dialog"
@@ -41,9 +34,11 @@ const APODCard = props => {
                         >
                             <img
                             className="apod_img" 
-                            alt="Astronomy Picture of the Day" 
+                            alt={props.date ? props.date : "Astronomy Photo of the Day"}
                             src={props.img ? props.img : img} 
-                            onClick={toggleImage}
+                            onClick={
+                                /* Calls toggle to hide modal */
+                                toggleImage}
                             />
                         </Modal>
                     </Overlay>)}
@@ -53,32 +48,50 @@ const APODCard = props => {
                             className="apod_img" 
                             alt="Picture of the Day" 
                             src={props.img ? props.img : img} 
-                            style={{
-                                display: props.loading ? "none" : "block", 
-                                cursor: "zoom-in" 
-                            }}
-                            onClick={toggleImage}
+                            style={{cursor: "zoom-in"}}
+                            onClick={
+                                /* Calls toggle to display modal */
+                                toggleImage}
                         />
                     </AspectRatio>
                     <TextContainer>
                         <h2 className="lead">{props.title}</h2>
                         <p className="lead">{props.description}</p>
-                        {copyright && <Copyright className="lead">©{props.copyright}</Copyright>}
+                        {props.copyright && 
+                        /* If there is a copyright value, display its component*/
+                        <Copyright className="lead">©{props.copyright}</Copyright>}
                     </TextContainer>
                     <ButtonContainer>
                         <Button 
-                            onClick={()=>{props.dateSub(props.date)}} 
+                            onClick={
+                                /* Calls the subtract date function from the parent */
+                                ()=>{props.dateSub(props.date)}} 
                             outline color="secondary"
                         >
                             previous
                         </Button>
                         <Button 
-                            onClick={()=>{props.dateAdd(props.date)}} 
+                            onClick={
+                                 /* Calls the subtract date function from the parent */
+                                ()=>{props.dateAdd(props.date)}} 
                             id="Forward" 
                             outline color="secondary" 
-                            disabled={imgDate < today ? false : true }
+                            disabled={
+                                /* Disable the forward button if it's todays date */
+                                props.imgDate < props.today ? false : true }
                         >
                             forward
+                        </Button>
+                        <Button 
+                            onClick={
+                                /* Calls setDate function from the parent with the value of today */
+                                ()=>{props.setDate(props.today)}} 
+                            outline color="secondary"
+                            disabled={
+                                /* Disable the today button if it's todays date */
+                                props.imgDate < props.today ? false : true }
+                        >
+                            today
                         </Button>
                     </ButtonContainer>
                 </Container>

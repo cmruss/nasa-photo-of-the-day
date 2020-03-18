@@ -1,8 +1,8 @@
 import styled from "styled-components";
-
+/* Create custom styled-components that are imported into the card*/
 export const ImgCard = styled.div`
     background: dimgrey;
-    padding: 2% 5% 0 5%;
+    padding: 5% 2% 0 2%;
     min-height: 100%;
     h1 {
         font-size: 3.4rem;
@@ -11,7 +11,7 @@ export const ImgCard = styled.div`
 export const AspectRatio = styled.div`
     width: 75%;
     position: relative;
-    height: 0;
+    height: 0; 
     padding-bottom: 75%;
     overflow: hidden;
     border-radius: 50%;
@@ -25,16 +25,21 @@ export const Overlay = styled.div`
     height: 100vh;
     overflow-y: scroll;
     z-index: 1; 
-    background-color: rgba(128,128,128,0.5);
+    background-color: rgba(28,28,28,0.95);
 `
 export const Modal = styled.div`
     position: absolute; 
     right: 0;
-    top: 0%;
-    margin: 5%;
+    top: 20%;
+    margin: 1%;
     cursor: zoom-out; 
-    background: whitesmoke;
+    background: dimgrey;
     border: none;
+    border-radius: 5px;
+    overflow:hidden;
+    img {
+        border-radius: 2px;
+    }
 `
 export const Img = styled.img`
     overflow: hidden;
