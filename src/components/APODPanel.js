@@ -25,7 +25,7 @@ export default function APODPanel() {
     /* Not yet implemented "loading" state hook for loader as well */
     const [loading, setLoading] = useState(true);
 
-    let startDate = "1995/06/16"
+    let startDate = moment(new Date("1995/06/16")).format("YYYY-MM-DD")
     /* Sets the value for today's date */
     let today = moment(new Date()).format("YYYY-MM-DD");
     /* Function for adding a day to the date set to state */
