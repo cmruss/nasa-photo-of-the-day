@@ -31,19 +31,19 @@ export default function APODPanel() {
     const dateAdd = (date) => {
         var newDate = new Date(date); 
         newDate.setDate(newDate.getDate() + 1);
-        setDate(newDate);
+        setDate(moment(newDate).format("YYYY-MM-DD"));
     }
      /* Function for subtracting a day from the date set to state */
     const dateSub = (date) => {
         var newDate = new Date(date);
         newDate.setDate(newDate.getDate() - 1);
-        setDate(newDate);
+        setDate(moment(newDate).format("YYYY-MM-DD"));
     }
     /* On mounting this component will make a call to the api */
     useEffect(() => {
         axios
         /* Url is hard coded except for the specified date, which points to the stored date, formatted for the apod api with moment.js, if blank api returns latest  */
-        .get(`https://api.nasa.gov/planetary/apod?api_key=BcVA8joxv0595Knb0NaCQ4bsU43BTYVKZl3egP6O&date=${moment(date).format("YYYY-MM-DD")}`)
+        .get(`https://api.nasa.gov/planetary/apod?api_key=BcVA8joxv0595Knb0NaCQ4bsU43BTYVKZl3egP6O&date=${date}`)
         .then(response => {
             /* Calls the function for setting the returned photo to state */
             setApod(response.data)
