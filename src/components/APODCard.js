@@ -74,7 +74,6 @@ const APODCard = props => {
                                 date => {props.setDate(moment(date).format("YYYY-MM-DD"))}}
                             style={{ display: "flex" }}
                             dateFormat={"YYYY-MM-DD"}
-                            minDate={("1995/06/17")}
                             maxDate={(props.today)}
                         />
                     </FormGroup>
