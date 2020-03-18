@@ -24,8 +24,10 @@ export default function APODPanel() {
     const [date, setDate] = useLocalStorage("apodDate", Date());
     /* Not yet implemented "loading" state hook for loader as well */
     const [loading, setLoading] = useState(true);
+    /* Error state for bad requests, dates without apod */
+    const [error, setError] = useState(false)
     /* Sets the earliest date for apod photos */
-    let startDate = new Date('06/16/1995').toISOString()
+    let startDate = moment(new Date('06 16 1995')).format("YYYY-MM-DD");
     /* Sets the value for today's date */
     let today = moment(new Date()).format("YYYY-MM-DD");
     /* Function for adding a day to the date set to state */
