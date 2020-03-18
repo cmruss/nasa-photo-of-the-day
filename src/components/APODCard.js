@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "reactstrap";
 import { Jumbotron, Container } from 'reactstrap';
 /* Image to display if the current image cant be returned */
-import img from "../img/404.jpg";
+import img from "../img/HAL.jpg";
 import { ImgCard, Img, AspectRatio,TextContainer, Copyright, Credit, ButtonContainer, Overlay, Modal }from "../styles/APODCardStyle";
 
 const APODCard = props => {
@@ -17,7 +17,8 @@ const APODCard = props => {
         <ImgCard 
             style={{
                 /* If no image loads use stock asset*/
-                backgroundImage: props.img ? `url(${props.img})` : `url(${img})`, 
+                backgroundColor: "rgba(28,28,28,0.95)",
+                backgroundImage: props.img ? `url(${props.img})` : "none", 
                 backgroundRepeat: "no-repeat", 
                 backgroundSize: "100% 100%", 
                 display: props.loading ? "none" : "block" 
@@ -49,9 +50,9 @@ const APODCard = props => {
                             alt="Picture of the Day" 
                             src={props.img ? props.img : img} 
                             style={{cursor: "zoom-in"}}
-                            onClick={
+                            onClick={ props.img?
                                 /* Calls toggle to display modal */
-                                toggleImage}
+                                toggleImage : ()=> alert("I'm sorry Dave, I'm afraid I can't do that.")}
                         />
                     </AspectRatio>
                     <TextContainer>
