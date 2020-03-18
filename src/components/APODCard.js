@@ -52,7 +52,7 @@ const APODCard = props => {
                             style={{cursor: "zoom-in"}}
                             onClick={ props.img?
                                 /* Calls toggle to display modal */
-                                toggleImage : ()=> alert("I'm sorry Dave, I'm afraid I can't do that.")}
+                                toggleImage : ()=> alert("I'm sorry Dave, I'm afraid I can't find that.\nWould you care to try another?")}
                         />
                     </AspectRatio>
                     <TextContainer>
