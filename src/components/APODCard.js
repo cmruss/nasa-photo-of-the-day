@@ -65,7 +65,7 @@ const APODCard = props => {
                         /* If there is a copyright value, display this component*/
                         <Copyright className="lead">©{props.copyright}</Copyright>}
                     </TextContainer>
-                    <FormGroup style={{ width: "45%", display: "flex" }} >
+                    <FormGroup style={{ width: "45%", margin: "5% auto" }} >
                         <DatePicker 
                             id= "example-datepicker" 
                             value={props.date} 
@@ -73,6 +73,9 @@ const APODCard = props => {
                                 /* Take the date selected from the date picker and set it to state date */
                                 date => {props.setDate(moment(date).format("YYYY-MM-DD"))}}
                             style={{ display: "flex" }}
+                            dateFormat={"YYYY-MM-DD"}
+                            minDate={props.startDate}
+                            maxDate={props.today}
                         />
                     </FormGroup>
                     <ButtonContainer>
@@ -81,6 +84,9 @@ const APODCard = props => {
                                 /* Calls the subtract date function from the parent */
                                 ()=>{props.dateSub(props.date)}} 
                             outline color="secondary"
+                            disabled={
+                                /* Disable the forward button if it's todays date */
+                                props.imgDate > props.startDate ? true : false }
                         >
                             previous
                         </Button>
