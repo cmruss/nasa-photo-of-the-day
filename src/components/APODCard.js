@@ -74,7 +74,7 @@ const APODCard = props => {
                                 date => {props.setDate(moment(date).format("YYYY-MM-DD"))}}
                             style={{ display: "flex" }}
                             dateFormat={"YYYY-MM-DD"}
-                            // minDate={(props.startDate)}
+                            minDate={("1995/06/17")}
                             maxDate={(props.today)}
                         />
                     </FormGroup>
@@ -84,8 +84,6 @@ const APODCard = props => {
                                 /* Calls the subtract date function from the parent */
                                 ()=>{props.dateSub(props.date)}} 
                             outline color="secondary"
-                            disabled={
-                                props.imgDate > props.startDate ? false : true }
                         >
                             previous
                         </Button>
