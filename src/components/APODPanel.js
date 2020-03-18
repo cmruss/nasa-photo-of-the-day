@@ -25,7 +25,7 @@ export default function APODPanel() {
     /* Not yet implemented "loading" state hook for loader as well */
     const [loading, setLoading] = useState(true);
     /* Sets the earliest date for apod photos */
-    let startDate = "1995-06-16T12:00:00.000Z"
+    let startDate = new Date('06/16/1995').toISOString()
     /* Sets the value for today's date */
     let today = moment(new Date()).format("YYYY-MM-DD");
     /* Function for adding a day to the date set to state */
