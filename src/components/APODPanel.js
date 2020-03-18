@@ -22,29 +22,29 @@ export default function APODPanel() {
     const [apod, setApod] = useState(initialState);
     /* Custom hook stores and fetches the chosen date from browsers localStorage for persistence */
     const [date, setDate] = useLocalStorage("apodDate", Date());
-    /* Not yet implemented "loading" state hook for loader as well */
-    const [loading, setLoading] = useState(true);
+    
+    const [error, setError] = useState(false);
 
-    let startDate = moment(new Date("06-17-1995")).format("YYYY-MM-DD");
+    const beginning = moment(new Date("1995-06-16")).format("YYYY-MM-DD")
     /* Sets the value for today's date */
     let today = moment(new Date()).format("YYYY-MM-DD");
     /* Function for adding a day to the date set to state */
     const dateAdd = (date) => {
         var newDate = new Date(date); 
         newDate.setDate(newDate.getDate() + 1);
-        setDate(moment(newDate).format("YYYY-MM-DD"));
+        setDate(newDate);
     }
      /* Function for subtracting a day from the date set to state */
     const dateSub = (date) => {
         var newDate = new Date(date);
         newDate.setDate(newDate.getDate() - 1);
-        setDate(moment(newDate).format("YYYY-MM-DD"));
+        setDate(newDate);
     }
     /* On mounting this component will make a call to the api */
     useEffect(() => {
         axios
         /* Url is hard coded except for the specified date, which points to the stored date, formatted for the apod api with moment.js, if blank api returns latest  */
-        .get(`https://api.nasa.gov/planetary/apod?api_key=BcVA8joxv0595Knb0NaCQ4bsU43BTYVKZl3egP6O&date=${date}`)
+        .get(`https://api.nasa.gov/planetary/apod?api_key=BcVA8joxv0595Knb0NaCQ4bsU43BTYVKZl3egP6O&date=${moment(date).format("YYYY-MM-DD")}`)
         .then(response => {
             /* Calls the function for setting the returned photo to state */
             setApod(response.data)
@@ -53,6 +53,7 @@ export default function APODPanel() {
         })
         .catch(err => {
             /* Tells me what went wrong when it does */
+            setError(true)
             console.log(`no dice`, err);
         })
         /* If the date set to state is changed, component update with another api call */
@@ -62,8 +63,6 @@ export default function APODPanel() {
         <div className="panel">
             <div className="card">
                 <APODCard 
-                    loading={loading}
-                    setLoading={setLoading}
                     setDate={setDate}
                     apod={apod}
                     title={apod.title}
@@ -71,7 +70,7 @@ export default function APODPanel() {
                     img={apod.hdurl}
                     description={apod.explanation}
                     copyright={apod.copyright}
-                    startDate={startDate}
+                    beginning={beginning}
                     today={today}
                     dateAdd={dateAdd} 
                     dateSub={dateSub}

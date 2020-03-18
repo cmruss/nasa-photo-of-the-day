@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import moment from "moment";
 import { Button } from "reactstrap";
 import { Jumbotron, Container, FormGroup } from 'reactstrap';
+import DatePicker from "reactstrap-date-picker";
+import moment from "moment";
+
 /* Image to display if the current image cant be returned */
 import img from "../img/HAL.jpg";
 import { ImgCard, Img, AspectRatio,TextContainer, Copyright, Credit, ButtonContainer, Overlay, Modal }from "../styles/APODCardStyle";
-import DatePicker from "reactstrap-date-picker";
 
 const APODCard = props => {
     /* State hook to determine if the modal shows or not, default not */
@@ -23,6 +24,7 @@ const APODCard = props => {
                 backgroundImage: props.img ? `url(${props.img})` : "none", 
                 backgroundRepeat: "no-repeat", 
                 backgroundSize: "100% 100%", 
+                display: props.loading ? "none" : "block" 
             }}
         >
             <Jumbotron fluid>
@@ -46,35 +48,32 @@ const APODCard = props => {
                     </Overlay>)}
                     <AspectRatio>
                         <Img 
-                            onLoad={props.setLoading(false)} 
                             className="apod_img" 
                             alt="Picture of the Day" 
-                            src={
-                                /* If no image loads use stock asset*/
-                                props.img ? props.img : img} 
+                            src={props.img ? props.img : img} 
                             style={{cursor: "zoom-in"}}
-                            onClick={ props.img ?
-                                /* Calls toggle to display modal, alert if no image*/
-                                toggleImage : ()=> alert("I'm sorry Dave, I'm afraid I can't find this image..\nWould you care to try another?")}
+                            onClick={ props.img?
+                                /* Calls toggle to display modal */
+                                toggleImage : ()=> alert("I'm sorry Dave, I'm afraid I can't find that.\nWould you care to try another?")}
                         />
                     </AspectRatio>
                     <TextContainer>
                         <h2 className="lead">{props.title}</h2>
                         <p className="lead">{props.description}</p>
                         {props.copyright && 
-                        /* If there is a copyright value, display this component*/
+                        /* If there is a copyright value, display its component*/
                         <Copyright className="lead">©{props.copyright}</Copyright>}
                     </TextContainer>
                     <FormGroup style={{ width: "45%", margin: "5% auto" }} >
                         <DatePicker 
                             id= "example-datepicker" 
-                            value={props.date} 
+                            value={moment(props.date).format("YYYY-MM-DD")} 
                             onChange={
                                 /* Take the date selected from the date picker and set it to state date */
-                                date => {props.setDate(moment(date).format("YYYY-MM-DD"))}}
+                                date => {props.setDate(date)}}
                             style={{ display: "flex" }}
                             dateFormat={"YYYY-MM-DD"}
-                            minDate={props.startDate}
+                            minDate={props.beginning}
                             maxDate={props.today}
                         />
                     </FormGroup>
@@ -86,7 +85,7 @@ const APODCard = props => {
                             outline color="secondary"
                             disabled={
                                 /* Disable the forward button if it's todays date */
-                                props.imgDate > props.startDate ? true : false }
+                                props.imgDate < props.beginning ? false : true }
                         >
                             previous
                         </Button>
