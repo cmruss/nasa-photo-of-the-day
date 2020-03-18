@@ -65,7 +65,7 @@ const APODCard = props => {
                         /* If there is a copyright value, display this component*/
                         <Copyright className="lead">©{props.copyright}</Copyright>}
                     </TextContainer>
-                    <FormGroup style={{ width: "45%", margin: "5% auto" }} >
+                    <FormGroup style={{ width: "45%", display: "flex" }} >
                         <DatePicker 
                             id= "example-datepicker" 
                             value={props.date} 
@@ -73,8 +73,6 @@ const APODCard = props => {
                                 /* Take the date selected from the date picker and set it to state date */
                                 date => {props.setDate(moment(date).format("YYYY-MM-DD"))}}
                             style={{ display: "flex" }}
-                            dateFormat={"YYYY-MM-DD"}
-                            // maxDate={(props.today)}
                         />
                     </FormGroup>
                     <ButtonContainer>
