@@ -8,15 +8,6 @@ export const ImgCard = styled.div`
         font-size: 3.4rem;
     }
 `;
-export const AspectRatio = styled.div`
-    width: 75%;
-    position: relative;
-    height: 0; 
-    padding-bottom: 75%;
-    overflow: hidden;
-    border-radius: 50%;
-    min-height: 100%;
-`;
 export const Overlay = styled.div`
     position: fixed;
     top: 0;
@@ -26,7 +17,7 @@ export const Overlay = styled.div`
     overflow-y: scroll;
     z-index: 1; 
     background-color: rgba(28,28,28,0.95);
-`
+`;
 export const Modal = styled.div`
     position: absolute; 
     right: 0;
@@ -40,12 +31,22 @@ export const Modal = styled.div`
     img {
         border-radius: 2px;
     }
-`
-export const Img = styled.img`
+`;
+export const AspectRatio = styled.div`
+    width: 75%;
+    position: relative;
+    padding-bottom: 75%;
     overflow: hidden;
+    border-radius: 50%;
+
+`;
+export const Img = styled.img`
     position: absolute;
     right: 0;
     min-height: 100%;
+
+    object-fit: cover;
+    
 `;
 export const TextContainer = styled.div`
     width: 85%;
