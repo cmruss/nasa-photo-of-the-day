@@ -15,14 +15,16 @@ export const Overlay = styled.div`
     width: 100vw;
     height: 100vh;
     overflow-y: scroll;
-    z-index: 1; 
+    z-index: 2; 
     background-color: rgba(28,28,28,0.95);
 `;
 export const Modal = styled.div`
     position: absolute; 
-    right: 0;
-    top: 20%;
-    margin: 1%;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;    
+    margin: 1% auto;
     cursor: zoom-out; 
     background: dimgrey;
     border: none;
@@ -38,13 +40,14 @@ export const AspectRatio = styled.div`
     padding-bottom: 75%;
     overflow: hidden;
     border-radius: 50%;
+    z-index: 1;
 
 `;
 export const Img = styled.img`
     position: absolute;
     right: 0;
     min-height: 100%;
-
+    min-width: 100%;
     object-fit: cover;
     
 `;

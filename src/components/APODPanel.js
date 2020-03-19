@@ -43,7 +43,7 @@ export default function APODPanel() {
     /* On mounting this component will make a call to the api */
     useEffect(() => {
         axios
-        /* Url is hard coded except for the specified date, which points to the stored date, formatted for the apod api with moment.js, if blank api returns latest  */
+        /* Url is hard coded except for the specified date, which points to the stored date, formatted for the apod api with moment.js */
         .get(`https://api.nasa.gov/planetary/apod?api_key=BcVA8joxv0595Knb0NaCQ4bsU43BTYVKZl3egP6O&date=${moment(date).format("YYYY-MM-DD")}`)
         .then(response => {
             /* Calls the function for setting the returned photo to state */

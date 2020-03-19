@@ -31,7 +31,7 @@ const APODCard = props => {
         >
             <Jumbotron fluid>
                 <Container props fluid>
-                    <h1 className="display-4">{ props.imgDate ? props.imgDate : moment(props.date).format("YYYY-MM-DD")}</h1>
+                    <h1 className="display-4">{ !props.imgDate || props.error ? moment(props.date).format("YYYY-MM-DD") : props.imgDate }</h1>
                     {modal && (
                     <Overlay>
                         <Modal
@@ -41,7 +41,7 @@ const APODCard = props => {
                             <img
                             className="apod_img" 
                             alt={props.date ? props.date : "Astronomy Photo of the Day"}
-                            src={props.img ? props.img : img} 
+                            src={!props.img || props.error ? null : props.img} 
                             onClick={
                                 /* Calls toggle to hide modal */
                                 toggleImage}
@@ -53,16 +53,16 @@ const APODCard = props => {
                             className="apod_img" 
                             alt="Picture of the Day" 
                             src={!props.img || props.error ? img : props.img} 
-                            style={{cursor: "zoom-in"}}
-                            onClick={ props.img ?
+                            style={{cursor: !props.img || props.error ? "not-allowed" : "zoom-in"}}
+                            onClick={ !props.img || props.error ?
                                 /* Calls toggle to display modal */
-                                toggleImage : ()=> alert("I'm sorry Dave, I'm afraid I can't find this image..\nWould you care to try another?") }
+                                null : toggleImage }
                         />
                     </AspectRatio>
                     <TextContainer>
                         <h2 className="lead">{props.error ? "I'm sorry Dave.." :props.title}</h2>
                         <p className="lead">{props.error ? "I'm afraid I can't find a photo for that date, why don't you try another one?" : props.description}</p>
-                        {props.copyright && 
+                        {!props.error && props.copyright && 
                         /* If there is a copyright value, display its component*/
                         <Copyright className="lead">©{props.copyright}</Copyright>}
                     </TextContainer>
@@ -72,7 +72,7 @@ const APODCard = props => {
                             value={moment(props.date).format("YYYY-MM-DD")} 
                             onChange={
                                 /* Take the date selected from the date picker and set it to state date */
-                                date => {props.setDate(date)}}
+                                date =>  date !== null ? props.setDate(date) : null }
                             style={{ display: "flex" }}
                             dateFormat={"YYYY-MM-DD"}
                             minDate={props.beginning}
