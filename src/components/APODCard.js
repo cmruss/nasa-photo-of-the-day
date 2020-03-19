@@ -4,7 +4,7 @@ import { Jumbotron, Container, FormGroup } from 'reactstrap';
 import DatePicker from "reactstrap-date-picker";
 import moment from "moment";
 
-/* Image to display if the current image cant be returned */
+/* Images to display if the current image cant be returned */
 import img from "../img/HAL.jpg";
 import imgCard from "../img/404.jpg";
 import { ImgCard, Img, AspectRatio,TextContainer, Copyright, Credit, ButtonContainer, Overlay, Modal }from "../styles/APODCardStyle";
@@ -60,22 +60,28 @@ const APODCard = props => {
                         />
                     </AspectRatio>
                     <TextContainer>
-                        <h2 className="lead">{props.error ? "I'm sorry Dave.." :props.title}</h2>
-                        <p className="lead">{props.error ? "I'm afraid I can't find a photo for that date, why don't you try another one?" : props.description}</p>
+                        <h2 className="lead">{
+                            /* Error handling gives custom messages */
+                            props.error ? "I'm sorry Dave.." :props.title}</h2>
+                        <p className="lead">{props.error ? "I'm afraid I can't find a photo for this date, why don't you try another one?" : props.description}</p>
                         {!props.error && props.copyright && 
-                        /* If there is a copyright value, display its component*/
+                        /* If there is a copyright value, and no error status, display its component*/
                         <Copyright className="lead">©{props.copyright}</Copyright>}
                     </TextContainer>
                     <FormGroup style={{ width: "45%", margin: "5% auto" }} >
                         <DatePicker 
                             id= "example-datepicker" 
+                            /* starts with the value the date is stored to state as */
                             value={moment(props.date).format("YYYY-MM-DD")} 
                             onChange={
                                 /* Take the date selected from the date picker and set it to state date */
                                 date =>  date !== null ? props.setDate(date) : null }
                             style={{ display: "flex" }}
+                            /*  Format the date to match the api date querystring format*/
                             dateFormat={"YYYY-MM-DD"}
+                            /* Limit the datepicker to dates after the first apod */
                             minDate={props.beginning}
+                             /* Limit the datepicker to dates bofore today */
                             maxDate={props.today}
                         />
                     </FormGroup>
@@ -86,14 +92,14 @@ const APODCard = props => {
                                 ()=>{props.dateSub(props.date)}} 
                             outline color="secondary"
                             disabled={
-                                /* Disable the forward button if it's todays date */
+                                /* Disable the previous button if it's the date of the first apod */
                                 props.beginning >= moment(props.date).format("YYYY-MM-DD") ? true : false }
                         >
                             previous
                         </Button>
                         <Button 
                             onClick={
-                                 /* Calls the subtract date function from the parent */
+                                 /* Calls the add date function from the parent */
                                 ()=>{props.dateAdd(props.date)}} 
                             id="Forward" 
                             outline color="secondary" 

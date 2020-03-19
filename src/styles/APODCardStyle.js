@@ -24,7 +24,7 @@ export const Modal = styled.div`
     margin-right: auto;
     left: 0;
     right: 0;    
-    margin: 1% auto;
+    margin: 10% auto;
     cursor: zoom-out; 
     background: dimgrey;
     border: none;

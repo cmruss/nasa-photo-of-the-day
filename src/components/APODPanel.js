@@ -30,14 +30,20 @@ export default function APODPanel() {
     let today = moment(new Date()).format("YYYY-MM-DD");
     /* Function for adding a day to the date set to state */
     const dateAdd = (date) => {
+        /* Declaring the current date as a function scope variable newDate, and then setting that newDate as our modified date before passing it back in to the "date" state value*/
         var newDate = new Date(date); 
+        /* This is not the setDate from the state hook, but a js Date method */
         newDate.setDate(newDate.getDate() + 1);
+        /* This is the state hook setDate  */
         setDate(newDate);
     }
      /* Function for subtracting a day from the date set to state */
     const dateSub = (date) => {
+        /* See above */
         var newDate = new Date(date);
+        /* This is not the setDate form the state hook, but a js Date method */
         newDate.setDate(newDate.getDate() - 1);
+        /* This is the state hook setDate  */
         setDate(newDate);
     }
     /* On mounting this component will make a call to the api */
@@ -48,18 +54,20 @@ export default function APODPanel() {
         .then(response => {
             /* Calls the function for setting the returned photo to state */
             setApod(response.data)
+            /* Makes sure errors are not thrown */
             setError(false)
         })
         .catch(err => {
-            /* Tells me what went wrong when it does */
+            /* Sets error status to state for custom error handling in child */
             setError(true)
+            /* Tells me what went wrong when it does */
             console.log(`no dice`, err);
         })
         /* Sets window to the top of the page on rerender */
         window.scrollTo(50, 0)
         /* If the date set to state is changed, component update with another api call */
     }, [date, error]);
-    /* JSX to pass props to and render my child component what shows all the fun stuff */
+    /* JSX below to pass props to and render my child component what shows all the fun stuff */
     return(
         <div className="panel">
             <div className="card">
