@@ -6,6 +6,7 @@ import moment from "moment";
 
 /* Image to display if the current image cant be returned */
 import img from "../img/HAL.jpg";
+import imgCard from "../img/404.jpg";
 import { ImgCard, Img, AspectRatio,TextContainer, Copyright, Credit, ButtonContainer, Overlay, Modal }from "../styles/APODCardStyle";
 
 const APODCard = props => {
@@ -21,15 +22,16 @@ const APODCard = props => {
             style={{
                 /* If no image loads use stock asset*/
                 backgroundColor: "rgba(28,28,28,0.95)",
-                backgroundImage: props.img ? `url(${props.img})` : "none", 
+                backgroundImage: !props.img || props.error ? `url(${imgCard})` : `url(${props.img})`, 
                 backgroundRepeat: "no-repeat", 
                 backgroundSize: "100% 100%", 
+                minWidth: "100vw",
                 display: props.loading ? "none" : "block" 
             }}
         >
             <Jumbotron fluid>
                 <Container props fluid>
-                    <h1 className="display-4">{props.imgDate}</h1>
+                    <h1 className="display-4">{ props.imgDate ? props.imgDate : moment(props.date).format("YYYY-MM-DD")}</h1>
                     {modal && (
                     <Overlay>
                         <Modal
@@ -50,16 +52,16 @@ const APODCard = props => {
                         <Img 
                             className="apod_img" 
                             alt="Picture of the Day" 
-                            src={props.img ? props.img : img} 
+                            src={!props.img || props.error ? img : props.img} 
                             style={{cursor: "zoom-in"}}
-                            onClick={ props.img?
+                            onClick={ props.img ?
                                 /* Calls toggle to display modal */
-                                toggleImage : ()=> alert("I'm sorry Dave, I'm afraid I can't find that.\nWould you care to try another?")}
+                                toggleImage : ()=> alert("I'm sorry Dave, I'm afraid I can't find this image..\nWould you care to try another?") }
                         />
                     </AspectRatio>
                     <TextContainer>
-                        <h2 className="lead">{props.title}</h2>
-                        <p className="lead">{props.description}</p>
+                        <h2 className="lead">{props.error ? "I'm sorry Dave.." :props.title}</h2>
+                        <p className="lead">{props.error ? "I'm afraid I can't find a photo for that date, why don't you try another one?" : props.description}</p>
                         {props.copyright && 
                         /* If there is a copyright value, display its component*/
                         <Copyright className="lead">©{props.copyright}</Copyright>}
@@ -85,7 +87,7 @@ const APODCard = props => {
                             outline color="secondary"
                             disabled={
                                 /* Disable the forward button if it's todays date */
-                                props.imgDate < props.beginning ? false : true }
+                                props.beginning >= moment(props.date).format("YYYY-MM-DD") ? true : false }
                         >
                             previous
                         </Button>

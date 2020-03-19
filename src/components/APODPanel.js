@@ -22,10 +22,10 @@ export default function APODPanel() {
     const [apod, setApod] = useState(initialState);
     /* Custom hook stores and fetches the chosen date from browsers localStorage for persistence */
     const [date, setDate] = useLocalStorage("apodDate", Date());
-    
+    /* If we catch an error in the call, set error status */
     const [error, setError] = useState(false);
-
-    const beginning = moment(new Date("1995-06-16")).format("YYYY-MM-DD")
+    /* sets value for the first apod */
+    const beginning = moment(new Date("1995-06-17")).format("YYYY-MM-DD")
     /* Sets the value for today's date */
     let today = moment(new Date()).format("YYYY-MM-DD");
     /* Function for adding a day to the date set to state */
@@ -48,21 +48,23 @@ export default function APODPanel() {
         .then(response => {
             /* Calls the function for setting the returned photo to state */
             setApod(response.data)
-            /* Sets window to the top of the page on rerender */
-            window.scrollTo(50, 0)
+            setError(false)
         })
         .catch(err => {
             /* Tells me what went wrong when it does */
             setError(true)
             console.log(`no dice`, err);
         })
+        /* Sets window to the top of the page on rerender */
+        window.scrollTo(50, 0)
         /* If the date set to state is changed, component update with another api call */
-    }, [date]);
+    }, [date, error]);
     /* JSX to pass props to and render my child component what shows all the fun stuff */
     return(
         <div className="panel">
             <div className="card">
                 <APODCard 
+                    error={error}
                     setDate={setDate}
                     apod={apod}
                     title={apod.title}
