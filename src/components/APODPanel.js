@@ -78,6 +78,7 @@ export default function APODPanel() {
             <div className="card">
                 <APODCard 
                     error={error}
+                    setError={setError}
                     loading={loading}
                     setLoading={setLoading}
                     setDate={setDate}

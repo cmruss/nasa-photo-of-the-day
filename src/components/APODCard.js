@@ -22,10 +22,6 @@ const APODCard = props => {
         document.body.style.overflow = modal ? "hidden" : "unset";
         /* On changing the state of the modal, the component will update the body scroll lock*/
      }, [ modal ]);
-     /* Once image has loaded this function is called to set loading state */
-     const imageLoaded = () => {
-        props.setLoading(false)
-     }
 
     return (
         <ImgCard 
@@ -60,7 +56,7 @@ const APODCard = props => {
                         <Img 
                             className="apod_img" 
                             alt="Astronomy Photo of the Day" 
-                            src={!props.img || props.error ? img : props.img} 
+                            src={props.error ? img : props.img} 
                             style={{
                                 cursor: !props.img || props.error ? "not-allowed" : "zoom-in",
                                 display: props.loading ? "none" : "block" 
@@ -68,7 +64,9 @@ const APODCard = props => {
                             onClick={ !props.img || props.error ?
                                 /* Calls toggle to display modal */
                                 null : toggleImage }
-                            onLoad={imageLoaded}
+                            onLoad={()=>
+                                props.setLoading(false) 
+                            }
                             onError={()=>{
                                 props.setLoading(false); 
                                 props.setError(true);

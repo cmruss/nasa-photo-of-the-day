@@ -6,14 +6,14 @@ const Loading = () => {
         <div className='loading-wrapper'>
             <ReactLoading
                 className='loading-component'
-                type='spinningBubbles'
-                color='#808080'
+                type='spin'
+                color='#2BAD60'
                 style={{   
                     minHeight: '100%',
                     minWidth: '100%',
                     objectFit: 'cover', 
                     position: 'absolute',
-                    right: 0
+                    right: 0,
                 }}
             />
         </div>
