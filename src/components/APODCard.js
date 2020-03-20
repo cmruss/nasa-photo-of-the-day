@@ -7,7 +7,7 @@ import moment from "moment";
 /* Images to display if the current image cant be returned */
 import img from "../img/HAL.jpg";
 import imgCard from "../img/404.jpg";
-import { ImgCard, Img, AspectRatio,TextContainer, Copyright, Credit, ButtonContainer, Overlay, Modal }from "../styles/APODCardStyle";
+import { ImgCard, Img, AspectRatio,TextContainer, Copyright, Credit, ButtonContainer, Overlay, Modal }from "../styles/APODCardStyles";
 
 const APODCard = props => {
     /* State hook to determine if the modal shows or not, default not */
@@ -21,11 +21,7 @@ const APODCard = props => {
         <ImgCard 
             style={{
                 /* If no image loads use stock asset*/
-                backgroundColor: "rgba(28,28,28,0.95)",
                 backgroundImage: !props.img || props.error ? `url(${imgCard})` : `url(${props.img})`, 
-                backgroundRepeat: "no-repeat", 
-                backgroundSize: "100% 100%", 
-                minWidth: "100vw",
                 display: props.loading ? "none" : "block" 
             }}
         >
@@ -51,7 +47,7 @@ const APODCard = props => {
                     <AspectRatio>
                         <Img 
                             className="apod_img" 
-                            alt="Picture of the Day" 
+                            alt="Astronomy Photo of the Day" 
                             src={!props.img || props.error ? img : props.img} 
                             style={{cursor: !props.img || props.error ? "not-allowed" : "zoom-in"}}
                             onClick={ !props.img || props.error ?
