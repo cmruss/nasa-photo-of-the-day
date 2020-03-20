@@ -16,9 +16,10 @@ const APODCard = props => {
     const toggleImage = () => {
         setModal(!modal)
     };
-
+    /* On component mount checks if the modal is open and locks the page scroll if it is */
     useEffect(() => {
         document.body.style.overflow = modal ? "hidden" : "unset";
+        /* On changing the state of the modal the component will update */
      }, [ modal ]);
 
     return (
