@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "reactstrap";
 import { Jumbotron, Container, FormGroup } from 'reactstrap';
 import DatePicker from "reactstrap-date-picker";
@@ -16,6 +16,10 @@ const APODCard = props => {
     const toggleImage = () => {
         setModal(!modal)
     };
+
+    useEffect(() => {
+        document.body.style.overflow = modal ? "hidden" : "unset";
+     }, [ modal ]);
 
     return (
         <ImgCard 
