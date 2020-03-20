@@ -22,6 +22,8 @@ export default function APODPanel() {
     const [apod, setApod] = useState(initialState);
     /* Custom hook stores and fetches the chosen date from browsers localStorage for persistence */
     const [date, setDate] = useLocalStorage("apodDate", Date());
+    /* Handles loading state, should default to true */
+    const [loading, setLoading] = useState(true);
     /* If we catch an error in the call, set error status */
     const [error, setError] = useState(false);
     /* sets value for the first apod */
@@ -48,6 +50,7 @@ export default function APODPanel() {
     }
     /* On mounting this component will make a call to the api */
     useEffect(() => {
+        setLoading(true);
         axios
         /* Url is hard coded except for the specified date, which points to the stored date, formatted for the apod api with moment.js */
         .get(`https://api.nasa.gov/planetary/apod?api_key=BcVA8joxv0595Knb0NaCQ4bsU43BTYVKZl3egP6O&date=${moment(date).format("YYYY-MM-DD")}`)
@@ -60,6 +63,8 @@ export default function APODPanel() {
         .catch(err => {
             /* Sets error status to state for custom error handling in child */
             setError(true)
+            /* Sets loading status to false for custom error handling */
+            setLoading(false)
             /* Tells me what went wrong when it does */
             console.log(`no dice`, err);
         })
@@ -73,6 +78,8 @@ export default function APODPanel() {
             <div className="card">
                 <APODCard 
                     error={error}
+                    loading={loading}
+                    setLoading={setLoading}
                     setDate={setDate}
                     apod={apod}
                     title={apod.title}

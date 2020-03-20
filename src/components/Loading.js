@@ -7,9 +7,14 @@ const Loading = () => {
             <ReactLoading
                 className='loading-component'
                 type='spinningBubbles'
-                color='#FFFFF'
-                height='4rem'
-                width='4rem'
+                color='#808080'
+                style={{   
+                    minHeight: '100%',
+                    minWidth: '100%',
+                    objectFit: 'cover', 
+                    position: 'absolute',
+                    right: 0
+                }}
             />
         </div>
     )

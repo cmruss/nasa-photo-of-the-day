@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import moment from "moment";
 import { Button } from "reactstrap";
 import { Jumbotron, Container, FormGroup } from 'reactstrap';
 import DatePicker from "reactstrap-date-picker";
-import moment from "moment";
-
+import Loading from "./Loading";
 /* Images to display if the current image cant be returned */
 import img from "../img/HAL.jpg";
 import imgCard from "../img/404.jpg";
+/* Styled components */
 import { ImgCard, Img, AspectRatio,TextContainer, Copyright, Credit, ButtonContainer, Overlay, Modal }from "../styles/APODCardStyles";
 
 const APODCard = props => {
@@ -19,30 +20,35 @@ const APODCard = props => {
     /* On component mount checks if the modal is open and locks the page scroll if it is */
     useEffect(() => {
         document.body.style.overflow = modal ? "hidden" : "unset";
-        /* On changing the state of the modal the component will update */
+        /* On changing the state of the modal, the component will update the body scroll lock*/
      }, [ modal ]);
+     /* Once image has loaded this function is called to set loading state */
+     const imageLoaded = () => {
+        props.setLoading(false)
+     }
 
     return (
         <ImgCard 
             style={{
                 /* If no image loads use stock asset*/
-                backgroundImage: !props.img || props.error ? `url(${imgCard})` : `url(${props.img})`, 
-                display: props.loading ? "none" : "block" 
+                backgroundImage: props.loading || !props.img || props.error ? `url(${imgCard})` : `url(${props.img})`, 
             }}
         >
             <Jumbotron fluid>
                 <Container props fluid>
                     <h1 className="display-4">{ !props.imgDate || props.error ? moment(props.date).format("YYYY-MM-DD") : props.imgDate }</h1>
                     {modal && (
-                    <Overlay>
+                    <Overlay 
+                        onClick={toggleImage}
+                    >
                         <Modal
                             className="dialog"
-                            onClick={toggleImage}
                         >
                             <img
                             className="apod_img" 
                             alt={props.date ? props.date : "Astronomy Photo of the Day"}
                             src={!props.img || props.error ? null : props.img} 
+                            style={{display: props.loading ? "none" : "block" }}
                             onClick={
                                 /* Calls toggle to hide modal */
                                 toggleImage}
@@ -50,14 +56,23 @@ const APODCard = props => {
                         </Modal>
                     </Overlay>)}
                     <AspectRatio>
+                    <Loading style={{display: props.loading ? "blcok" : "none" }}/>
                         <Img 
                             className="apod_img" 
                             alt="Astronomy Photo of the Day" 
                             src={!props.img || props.error ? img : props.img} 
-                            style={{cursor: !props.img || props.error ? "not-allowed" : "zoom-in"}}
+                            style={{
+                                cursor: !props.img || props.error ? "not-allowed" : "zoom-in",
+                                display: props.loading ? "none" : "block" 
+                            }}
                             onClick={ !props.img || props.error ?
                                 /* Calls toggle to display modal */
                                 null : toggleImage }
+                            onLoad={imageLoaded}
+                            onError={()=>{
+                                props.setLoading(false); 
+                                props.setError(true);
+                            }}
                         />
                     </AspectRatio>
                     <TextContainer>
