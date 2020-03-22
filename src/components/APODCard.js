@@ -87,9 +87,7 @@ const APODCard = props => {
                                 allow='autoplay; encrypted-media'
                                 allowFullScreen
                                 title='video'
-                                onLoad={()=>
-                                    props.setLoading(false)
-                                }
+                                onLoad={props.setLoading(false)}
                         /> 
                     }
                     </AspectRatio>
