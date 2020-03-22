@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { Button } from "reactstrap";
 import { Jumbotron, Container, FormGroup } from 'reactstrap';
@@ -8,7 +8,7 @@ import Loading from "./Loading";
 import img from "../img/HAL.jpg";
 import imgCard from "../img/404.jpg";
 /* Styled components */
-import { ImgCard, Img, AspectRatio,TextContainer, Copyright, Credit, ButtonContainer, Overlay, Modal }from "../styles/APODCardStyles";
+import { ImgCard, Img, Video, AspectRatio,TextContainer, Copyright, Credit, ButtonContainer, Overlay, Modal }from "../styles/APODCardStyles";
 
 const APODCard = props => {
     /* State hook to determine if the modal shows or not, default not */
@@ -51,8 +51,17 @@ const APODCard = props => {
                             />
                         </Modal>
                     </Overlay>)}
-                    <AspectRatio>
-                    <Loading style={{display: props.loading ? "blcok" : "none" }}/>
+                    <AspectRatio 
+                        style={{ 
+                            /* If the media type is a video, change from round frame to square */
+                            borderRadius: props.media === "image" ? "50%": "2px"
+                        }}
+                    >
+                    <Loading style={{
+                        /* If loading show the loader */
+                        display: props.loading ? "block" : "none" }}/>
+                    {props.media === "image" ?
+                        /* Conditionally render either image or video by media type */
                         <Img 
                             className="apod_img" 
                             alt="Astronomy Photo of the Day" 
@@ -72,6 +81,17 @@ const APODCard = props => {
                                 props.setError(true);
                             }}
                         />
+                    :
+                        <Video src={props.video}
+                                frameBorder='0'
+                                allow='autoplay; encrypted-media'
+                                allowFullScreen
+                                title='video'
+                                onLoad={()=>
+                                    props.setLoading(false)
+                                }
+                        /> 
+                    }
                     </AspectRatio>
                     <TextContainer>
                         <h2 className="lead">{

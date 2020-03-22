@@ -76,23 +76,25 @@ export default function APODPanel() {
     return(
         <div className="panel">
             <div className="card">
-                <APODCard 
-                    error={error}
-                    setError={setError}
-                    loading={loading}
-                    setLoading={setLoading}
-                    setDate={setDate}
+                <APODCard
                     apod={apod}
                     title={apod.title}
                     imgDate={apod.date}
+                    media={apod.media_type}
                     img={apod.hdurl}
+                    video={apod.url}
                     description={apod.explanation}
                     copyright={apod.copyright}
                     beginning={beginning}
                     today={today}
+                    date={date}
+                    setDate={setDate}
                     dateAdd={dateAdd} 
                     dateSub={dateSub}
-                    date={date}
+                    error={error}
+                    setError={setError}
+                    loading={loading}
+                    setLoading={setLoading}
                 />
             </div>
         </div>
