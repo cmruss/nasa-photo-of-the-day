@@ -59,7 +59,8 @@ const APODCard = props => {
                     >
                     <Loading style={{
                         /* If loading show the loader */
-                        display: props.loading ? "block" : "none" }}/>
+                        display: props.loading === true ? "block" : "none" }}
+                    />
                     {props.media === "image" ?
                         /* Conditionally render either image or video by media type */
                         <Img 
@@ -88,6 +89,7 @@ const APODCard = props => {
                                 allowFullScreen
                                 title='video'
                                 onLoad={props.setLoading(false)}
+                                style={{ display: props.loading ? "none" : "block" }}
                         /> 
                     }
                     </AspectRatio>
