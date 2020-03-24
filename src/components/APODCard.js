@@ -92,9 +92,10 @@ const APODCard = props => {
                     }
                     </AspectRatio>
                     <TextContainer>
+                        <p>{props.loading.toString()}</p>
                         <h2 className="lead">{
                             /* Error handling gives custom messages */
-                            props.error ? "I'm sorry Dave.." :props.title}</h2>
+                            props.error ? "I'm sorry Dave.." : props.title}</h2>
                         <p className="lead">{props.error ? "I'm afraid I can't find a photo for this date, why don't you try another one?" : props.description}</p>
                         {!props.error && props.copyright && 
                         /* If there is a copyright value, and no error status, display its component*/
