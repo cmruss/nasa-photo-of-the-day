@@ -57,10 +57,12 @@ const APODCard = props => {
                             borderRadius: props.media === "image" ? "50%": "2px"
                         }}
                     >
-                    <Loading style={{
-                        /* If loading show the loader */
-                        display: props.loading === true ? "block" : "none" }}
-                    />
+                    <div className="loading-wrapper" style={{
+                        /* If loading show the loader, style property does not exist on Loading
+                         * Hence the div wrapper */
+                        display: props.loading === true ? "block" : "none" }}>
+                        <Loading/>
+                    </div>
                     {props.media === "image" ?
                         /* Conditionally render either image or video by media type */
                         <Img 
@@ -94,7 +96,6 @@ const APODCard = props => {
                     }
                     </AspectRatio>
                     <TextContainer>
-                        <p>{props.loading.toString()}</p>
                         <h2 className="lead">{
                             /* Error handling gives custom messages */
                             props.error ? "I'm sorry Dave.." : props.title}</h2>
