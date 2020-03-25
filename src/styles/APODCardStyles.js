@@ -54,6 +54,7 @@ export const Video = styled.iframe`
     min-height: 100%;
     min-width: 100%;
     object-fit: cover;
+    position: absolute;
     z-index: 3;
 `
 export const TextContainer = styled.div`
