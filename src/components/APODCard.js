@@ -57,12 +57,12 @@ const APODCard = props => {
                             borderRadius: props.media === "image" ? "50%": "2px"
                         }}
                     >
-                    <div className="loading-wrapper" style={{
-                        /* If loading show the loader, style property does not exist on Loading
-                         * Hence the div wrapper */
+                    {/* <div className="loading-wrapper" style={{
+                         If loading show the loader, style property does not exist on Loading
+                         Hence the div wrapper
                         display: props.loading === true ? "block" : "none" }}>
                         <Loading/>
-                    </div>
+                    </div> */}
                     {props.media === "image" ?
                         /* Conditionally render either image or video by media type */
                         <Img 
