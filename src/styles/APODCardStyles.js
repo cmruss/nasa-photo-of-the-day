@@ -37,8 +37,6 @@ export const Modal = styled.div`
 `;
 export const AspectRatio = styled.div`
     border-radius: 50%;
-    min-height: 100%;
-    min-width: 80%;
     overflow: hidden;
     padding-bottom: 80%;
     position: relative;
@@ -57,6 +55,8 @@ export const Video = styled.iframe`
     min-width: 100%;
     object-fit: cover;
     position: absolute;
+    top: 0;
+    left: 0;
 `
 export const TextContainer = styled.div`
     margin: 5% auto;
