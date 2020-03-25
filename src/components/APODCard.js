@@ -60,7 +60,7 @@ const APODCard = props => {
                     <div className="loading-wrapper" style={{
                         /* If loading show the loader, style property does not exist on Loading
                          * Hence the div wrapper */
-                        display: props.loading === true ? "block" : "none" }}>
+                        display: props.loading ? "block" : "none" }}>
                         <Loading/>
                     </div>
                     {props.media === "image" || props.error ?

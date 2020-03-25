@@ -52,12 +52,12 @@ export const Img = styled.img`
 `;
 export const Video = styled.iframe`
     min-height: 100%;
-    min-width: 100%;
     object-fit: cover;
     position: absolute;
-    top: 0;
-    left: 0;
-`
+    width: 1px;
+    min-width: 100%;
+    *width: 100%;
+`;
 export const TextContainer = styled.div`
     margin: 5% auto;
     width: 85%;
