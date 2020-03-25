@@ -54,7 +54,7 @@ const APODCard = props => {
                     <AspectRatio 
                         style={{ 
                             /* If the media type is a video, change from round frame to square */
-                            borderRadius: props.media === "image" ? "50%": "2px"
+                            borderRadius: props.media === "image" || props.error ? "50%": "5px"
                         }}
                     >
                     <div className="loading-wrapper" style={{
@@ -63,7 +63,7 @@ const APODCard = props => {
                         display: props.loading === true ? "block" : "none" }}>
                         <Loading/>
                     </div>
-                    {props.media === "image" ?
+                    {props.media === "image" || props.error ?
                         /* Conditionally render either image or video by media type */
                         <Img 
                             className="apod_img" 
@@ -91,7 +91,7 @@ const APODCard = props => {
                                 allowFullScreen
                                 title='video'
                                 onLoad={props.setLoading(false)}
-                                // style={{ display: props.loading ? "none" : "block" }}
+                                style={{ display: props.loading ? "none" : "block" }}
                         /> 
                     }
                     </AspectRatio>
