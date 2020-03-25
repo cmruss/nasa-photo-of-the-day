@@ -55,6 +55,7 @@ export const Video = styled.iframe`
     min-width: 100%;
     object-fit: cover;
     position: absolute;
+    right: 0;
 `
 export const TextContainer = styled.div`
     margin: 5% auto;
