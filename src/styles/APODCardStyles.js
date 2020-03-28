@@ -50,9 +50,24 @@ export const Img = styled.img`
     position: absolute;
     right: 0;
 `;
+export const VideoWrapper = styled.div`
+    padding: auto;
+    background-color: rgba(28,28,28,0);
+    border-radius: 5px;
+    overflow: hidden;
+    padding-bottom: 80%;
+    position: relative;
+    width: 80%;
+    z-index: 1;
+`
 export const Video = styled.iframe`
+    position: absolute;
+    top: 0;
+    left: 0;
     min-height: 100%;
     min-width: 100%;
+    object-fit: cover;
+
 `;
 export const TextContainer = styled.div`
     margin: 5% auto;

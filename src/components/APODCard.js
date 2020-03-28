@@ -8,7 +8,7 @@ import Loading from "./Loading";
 import img from "../img/HAL.jpg";
 import imgCard from "../img/404.jpg";
 /* Styled components */
-import { ImgCard, Img, Video, AspectRatio,TextContainer, Copyright, Credit, ButtonContainer, Overlay, Modal }from "../styles/APODCardStyles";
+import { ImgCard, Img, VideoWrapper, Video, AspectRatio, TextContainer, Copyright, Credit, ButtonContainer, Overlay, Modal }from "../styles/APODCardStyles";
 
 const APODCard = props => {
     /* State hook to determine if the modal shows or not, default not */
@@ -85,15 +85,16 @@ const APODCard = props => {
                                 props.setError(true);
                             }}
                         />
-                    :
-                        <Video src={props.video}
-                                frameBorder='0'
-                                allow='autoplay; encrypted-media'
-                                allowFullScreen
-                                title='video'
-                                onLoad={props.setLoading(false)}
-                                style={{ display: props.loading ? "none" : "block" }}
-                        /> 
+                    :   <VideoWrapper>
+                            <Video src={props.video}
+                                    frameBorder='0'
+                                    allow='autoplay; encrypted-media'
+                                    allowFullScreen
+                                    title='video'
+                                    onLoad={props.setLoading(false)}
+                                    style={{ display: props.loading ? "none" : "block" }}
+                            /> 
+                        </VideoWrapper>
                     }
                     </AspectRatio>
                     <TextContainer>
