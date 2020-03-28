@@ -52,6 +52,7 @@ export const Img = styled.img`
 `;
 export const Video = styled.iframe`
     min-height: 100%;
+    min-width: 100%;
     object-fit: cover;
     position: absolute;
     right: 0;
