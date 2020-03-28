@@ -53,7 +53,6 @@ export const Img = styled.img`
 export const Video = styled.iframe`
     min-height: 100%;
     min-width: 100%;
-  
 `;
 export const TextContainer = styled.div`
     margin: 5% auto;

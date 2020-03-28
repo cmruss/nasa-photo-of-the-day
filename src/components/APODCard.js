@@ -54,7 +54,8 @@ const APODCard = props => {
                     <AspectRatio 
                         style={{ 
                             /* If the media type is a video, change from round frame to square */
-                            borderRadius: props.media === "image" || props.error ? "50%": "5px"
+                            borderRadius: props.media === "image" || props.error ? "50%": "5px",
+                            paddingBottom: props.media === "image" || props.error ? "80%" : 0
                         }}
                     >
                     <div className="loading-wrapper" style={{
@@ -95,14 +96,6 @@ const APODCard = props => {
                         /> 
                     }
                     </AspectRatio>
-                    <Video src={props.video}
-                                frameBorder='0'
-                                allow='autoplay; encrypted-media'
-                                allowFullScreen
-                                title='video'
-                                onLoad={props.setLoading(false)}
-                                style={{ display: props.loading ? "none" : "block" }}
-                        /> 
                     <TextContainer>
                         <h2 className="lead">{
                             /* Error handling gives custom messages */
