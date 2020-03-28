@@ -40,6 +40,7 @@ export const AspectRatio = styled.div`
     overflow: hidden;
     position: relative;
     width: 80%;
+    height:auto;
     z-index: 1;
 `;
 export const Img = styled.img`
