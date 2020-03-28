@@ -95,6 +95,14 @@ const APODCard = props => {
                         /> 
                     }
                     </AspectRatio>
+                    <Video src={props.video}
+                                frameBorder='0'
+                                allow='autoplay; encrypted-media'
+                                allowFullScreen
+                                title='video'
+                                onLoad={props.setLoading(false)}
+                                style={{ display: props.loading ? "none" : "block" }}
+                        /> 
                     <TextContainer>
                         <h2 className="lead">{
                             /* Error handling gives custom messages */
