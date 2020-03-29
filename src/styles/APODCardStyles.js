@@ -51,22 +51,19 @@ export const Img = styled.img`
     right: 0;
 `;
 export const VideoWrapper = styled.div`
-    padding: auto;
-    background-color: rgba(28,28,28,0);
-    border-radius: 5px;
-    overflow: hidden;
-    padding-bottom: 80%;
     position: relative;
-    width: 80%;
-    z-index: 1;
+    padding-bottom: 56.25%;
+    padding-top: 35px;
+    height: 0;
+    border: 0;
+    overflow: hidden;
 `
 export const Video = styled.iframe`
     position: absolute;
-    top: 0;
+    top:0;
     left: 0;
-    min-height: 100%;
-    min-width: 100%;
-    object-fit: cover;
+    width: 100%;
+    height: 100%;
 
 `;
 export const TextContainer = styled.div`
