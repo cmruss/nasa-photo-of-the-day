@@ -52,19 +52,15 @@ export const Img = styled.img`
 `;
 export const VideoWrapper = styled.div`
     position: relative;
-    padding-bottom: 56.25%;
-    padding-top: 35px;
+    padding: 50% 0;
     height: 0;
-    border: 0;
-    overflow: hidden;
 `
 export const Video = styled.iframe`
     position: absolute;
-    top:0;
+    top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-
 `;
 export const TextContainer = styled.div`
     margin: 5% auto;
